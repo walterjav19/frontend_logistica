@@ -1,13 +1,14 @@
-function TablaOrdenes() {
+function TablaEntrega() {
     return (
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
             <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                <thead className="text-xs text-gray-700 uppercase bg-blue-100 dark:bg-blue-700 dark:text-gray-400">
-                    <tr>
-                        <th colSpan="7" className="px-7 py-3 text-center text-lg font-semibold text-gray-900 dark:text-white">
-                            Ordenes Recibidas
-                        </th>
+                <thead className="text-xs text-gray-700 uppercase bg-pink-300 dark:bg-blue-700 dark:text-gray-400">
+                <tr>
+                    <th colSpan="6" className="px-6 py-3 text-center text-lg font-semibold text-gray-900 dark:text-white">
+                        Ordenes Entregadas
+                    </th>
                     </tr>
+                    
                     <tr>
                         <th scope="col" className="px-6 py-3">
                             Id Orden
@@ -27,9 +28,7 @@ function TablaOrdenes() {
                         <th scope="col" className="px-6 py-3">
                             Status
                         </th>
-                        <th scope="col" className="px-6 py-3">
-                            Entrega
-                        </th>
+    
                     </tr>
                 </thead>
                 <tbody>
@@ -52,9 +51,7 @@ function TablaOrdenes() {
                         <td className="px-6 py-4 text-purple-500">
                             <a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
                         </td>
-                        <td>
-                        <button type="button" class="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Entregar</button>
-                        </td>
+
                     </tr>
                 </tbody>
             </table>
@@ -62,4 +59,4 @@ function TablaOrdenes() {
     );
 }
 
-export default TablaOrdenes;
+export default TablaEntrega;
