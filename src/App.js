@@ -1,16 +1,25 @@
 import './App.css';
-import './components/Tabla'
-import TablaOrdenes from './components/Tabla';
+
+import TablaOrdenes from './components/TablaOrdenes';
 import TablaEntrega from './components/TablaEntrega';
+import React, { useState } from 'react';
+
 
 function App() {
+
+  const [entregas, setEntregas] = useState([]);
+
+  const handleEntregarOrden = (orden) => {
+      setEntregas([...entregas, orden]);
+  };
+
   return (
     <div className="bg">
        <div className="mb-8"> {/* Margen inferior para la separación */}
-                <TablaOrdenes />
+                <TablaOrdenes onEntregarOrden={handleEntregarOrden}/>
             </div>
             <div>
-                <TablaEntrega />
+                <TablaEntrega entregas={entregas}/>
             </div>
     </div>
   );
