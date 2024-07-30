@@ -25,10 +25,6 @@ function TablaEntrega({entregas}) {
                         <th scope="col" className="px-6 py-3">
                             Partner
                         </th>
-                        <th scope="col" className="px-6 py-3">
-                            Status
-                        </th>
-    
                     </tr>
                 </thead>
                 <tbody>
@@ -49,9 +45,6 @@ function TablaEntrega({entregas}) {
                             </td>
                             <td className="px-6 py-4">
                                 {entrega.partner}
-                            </td>
-                            <td className="px-6 py-4 text-purple-500">
-                                <a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
                             </td>
                         </tr>
                     ))}

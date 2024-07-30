@@ -2,6 +2,7 @@ import './App.css';
 
 import TablaOrdenes from './components/TablaOrdenes';
 import TablaEntrega from './components/TablaEntrega';
+import ModalEdit from './components/ModalEdit';
 import React, { useState } from 'react';
 
 
@@ -15,6 +16,7 @@ function App() {
 
   return (
     <div className="bg">
+      <ModalEdit/>
        <div className="mb-8"> {/* Margen inferior para la separación */}
                 <TablaOrdenes onEntregarOrden={handleEntregarOrden}/>
             </div>
