@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ModalEdit from './ModalEdit';
+import {FetchAllOrders} from '../consume';
+import axios from 'axios';
 
 function TablaOrdenes({ onEntregarOrden }) {
     const [ordenes, setOrdenes] = useState([]);
@@ -8,19 +10,39 @@ function TablaOrdenes({ onEntregarOrden }) {
     //setOrdenes(data);
     // Función para obtener las órdenes del servidor
     const fetchOrdenes = async () => {
-        const myHeaders = new Headers();
-        myHeaders.append("Authorization", "Basic dHJhaW5pbmd3YWx0ZXJzYW50aXpvLVlFUjJEWi5VUExOMDQ6YTVmNDA1NzUtOTIyOC00YWEyLWIwMGQtMGIyMGFlZjVjZTQ2");
+        try {
+            const response = await fetch('http://127.0.0.1:5000/orders');
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            const data = await response.json();
+            setOrdenes(data);
+        } catch (error) {
+            console.error('There was a problem with the fetch operation:', error);
+        }
+    };
 
-        const requestOptions = {
-        method: "GET",
-        headers: myHeaders,
-        redirect: "follow"
+    const fetchOrdenes2 =  () => {
+        console.log('axios');
+        const url = '/orders';
+        const username = 'walterjav@trainingwaltersantizo-YER2DZ.UPLN04';
+        const password = 'bc2bc710-aafe-4614-8e74-f5341356668d';
+        
+        const auth = {
+          username: username,
+          password: password
         };
-
-        fetch("https://c03-usa-east.integrate-test.boomi.com/ws/rest/orders/", requestOptions)
-        .then((response) => response.text())
-        .then((result) => {console.log(result); setOrdenes(result);})
-        .catch((error) => console.error(error));
+        
+        axios.get(url, { auth: auth })
+          .then(response => {
+            console.log('llwgo')
+            console.log(response.data);
+          })
+          .catch(error => {
+            console.error('Error fetching data:', error);
+          });
+        
+   
     };
 
     const GeneraOrden = () => {
@@ -51,20 +73,20 @@ function TablaOrdenes({ onEntregarOrden }) {
         setSelectedOrder(null);
     };
 
-    // Usar useEffect para cargar datos al montar el componente y cada 30 segundos
-    useEffect(() => {
-        fetchOrdenes(); // Cargar datos inicialmente
+        // // Usar useEffect para cargar datos al montar el componente y cada 30 segundos
+        // useEffect(() => {
+        //     fetchOrdenes2(); // Cargar datos inicialmente
 
-        const intervalId = setInterval(() => {
-            fetchOrdenes(); // Actualizar datos cada 30 segundos
-        }, 30000); // 30 segundos
+        //     const intervalId = setInterval(() => {
+        //         fetchOrdenes2(); // Actualizar datos cada 30 segundos
+        //     }, 5000); // 5 segundos
 
-        return () => clearInterval(intervalId); // Limpiar intervalo al desmontar el componente
-    }, []);
+        //     return () => clearInterval(intervalId); // Limpiar intervalo al desmontar el componente
+        // }, []);
 
     return (
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-            <button className="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2" onClick={GeneraOrden}>Genera Orden</button>
+            <button className="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2" onClick={fetchOrdenes2}>Genera Orden</button>
             <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 mt-8">
                 <thead className="text-xs text-gray-700 uppercase bg-blue-100 dark:bg-blue-700 dark:text-gray-400">
                     <tr>

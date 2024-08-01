@@ -93,5 +93,24 @@
         "interfaceName": "Solace Listener: Send Orders to Salesforce OMS",
         "direction": "IN",
         "partner": "JAVIER"
+    },
+    {
+        "category": "DTC",
+        "entityId": "L702640338",
+        "entityType": "OrderId",
+        "environment": "Production",
+        "country": "GT",
+        "origin": "Boomi",
+        "businessProcess": "Order",
+        "stage": "Create OMS Order",
+        "status": "Success",
+        "businessObject": "Order Creation",
+        "timestamp": "2024-07-09T14:30:00.000Z",
+        "transaction": "4804867647529664096",
+        "executionId": "execution-8ee9224c-2cad-40ef-a824-757af3eb49b9-2024.07.09",
+        "final": "true",
+        "interfaceName": "Solace Listener: Send Orders to Salesforce OMS",
+        "direction": "IN",
+        "partner": "JAVIER2"
     }
 ]

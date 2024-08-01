@@ -3,7 +3,8 @@ import './App.css';
 import TablaOrdenes from './components/TablaOrdenes';
 import TablaEntrega from './components/TablaEntrega';
 import ModalEdit from './components/ModalEdit';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
   const handleEntregarOrden = (orden) => {
       setEntregas([...entregas, orden]);
   };
+
 
   return (
     <div className="bg">
