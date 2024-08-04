@@ -8,59 +8,45 @@ function TablaOrdenes({ onEntregarOrden }) {
     const [selectedOrder, setSelectedOrder] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
     //setOrdenes(data);
-    // Función para obtener las órdenes del servidor
-    const fetchOrdenes = async () => {
-        try {
-            const response = await fetch('http://127.0.0.1:5000/orders');
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            const data = await response.json();
-            setOrdenes(data);
-        } catch (error) {
-            console.error('There was a problem with the fetch operation:', error);
-        }
-    };
+
 
     const fetchOrdenes2 =  () => {
-        console.log('axios');
+        //console.log('axios');
         const url = '/orders';
-        const username = 'walterjav@trainingwaltersantizo-YER2DZ.UPLN04';
-        const password = 'bc2bc710-aafe-4614-8e74-f5341356668d';
-        
+        const username = 'DummyUser@blueorangeintegrationtech-AD9F0T.WSHFWA';
+        const password = 'efb29cfc-64e3-43cd-b550-4ad68de166f0';
+
         const auth = {
-          username: username,
-          password: password
+        username: username,
+        password: password
         };
-        
+
         axios.get(url, { auth: auth })
-          .then(response => {
-            console.log('llwgo')
-            console.log(response.data);
-          })
-          .catch(error => {
+        .then(response => {
+            setOrdenes(response.data);
+            //console.log(response.data);
+        })
+        .catch(error => {
             console.error('Error fetching data:', error);
-          });
+        });
+
         
    
     };
 
-    const GeneraOrden = () => {
-        // Aquí puedes generar una nueva orden. Este es un ejemplo estático.
-        const nuevaOrden = {
-            entityId: `L${Math.floor(Math.random() * 1000000000)}`,
-            country: 'ES',
-            timestamp: new Date().toISOString().split('T')[0],
-            transaction: `${Math.floor(Math.random() * 10000000)}`,
-            partner: 'ABC',
-        };
-        setOrdenes([...ordenes, nuevaOrden]);
-    };
+  
+
+
 
     const EntregarOrden = (index) => {
         // Borrar la orden entregada y agregarla a la tabla de entregas
         onEntregarOrden(ordenes[index]);
         setOrdenes(ordenes.filter((_, i) => i !== index));
+
+        const body={
+            id: "AJ769",
+        }
+        console.log(body);
     };
 
     const handleEditClick = (order) => {
@@ -73,20 +59,20 @@ function TablaOrdenes({ onEntregarOrden }) {
         setSelectedOrder(null);
     };
 
-        // // Usar useEffect para cargar datos al montar el componente y cada 30 segundos
-        // useEffect(() => {
-        //     fetchOrdenes2(); // Cargar datos inicialmente
+        // Usar useEffect para cargar datos al montar el componente y cada 30 segundos
+        useEffect(() => {
+            fetchOrdenes2(); // Cargar datos inicialmente
 
-        //     const intervalId = setInterval(() => {
-        //         fetchOrdenes2(); // Actualizar datos cada 30 segundos
-        //     }, 5000); // 5 segundos
+            const intervalId = setInterval(() => {
+                fetchOrdenes2(); // Actualizar datos cada 30 segundos
+            }, 10000); // 10 segundos
 
-        //     return () => clearInterval(intervalId); // Limpiar intervalo al desmontar el componente
-        // }, []);
+            return () => clearInterval(intervalId); // Limpiar intervalo al desmontar el componente
+        }, []);
 
     return (
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-            <button className="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2" onClick={fetchOrdenes2}>Genera Orden</button>
+
             <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 mt-8">
                 <thead className="text-xs text-gray-700 uppercase bg-blue-100 dark:bg-blue-700 dark:text-gray-400">
                     <tr>
@@ -99,19 +85,19 @@ function TablaOrdenes({ onEntregarOrden }) {
                             Id Orden
                         </th>
                         <th scope="col" className="px-6 py-3">
-                            Country
+                            Description
                         </th>
                         <th scope="col" className="px-6 py-3">
-                            TimeStamp
-                        </th>
-                        <th scope="col" className="px-6 py-3">
-                            No. Transaction
-                        </th>
-                        <th scope="col" className="px-6 py-3">
-                            Partner
+                            Total Ammount
                         </th>
                         <th scope="col" className="px-6 py-3">
                             Status
+                        </th>
+                        <th scope="col" className="px-6 py-3">
+                            Fecha Recibido
+                        </th>
+                        <th scope="col" className="px-6 py-3">
+                            Fecha Entregado
                         </th>
                         <th scope="col" className="px-6 py-3">
                             Entrega
@@ -122,22 +108,22 @@ function TablaOrdenes({ onEntregarOrden }) {
                     {ordenes.map((orden, index) => (
                         <tr key={index} className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
                             <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                {orden.entityId}
+                                {orden.id}
                             </th>
                             <td className="px-6 py-4 text-green-500">
-                                {orden.country}
+                                {orden.description}
                             </td>
                             <td className="px-6 py-4 text-red-500">
-                                {orden.timestamp}
+                                {orden.totalAmount}
                             </td>
                             <td className="px-6 py-4 text-yellow-500">
-                                {orden.transaction}
+                                {orden.status}
                             </td>
                             <td className="px-6 py-4">
-                                {orden.partner}
+                                {orden.receivedByWarehouseAt}
                             </td>
                             <td className="px-6 py-4 text-purple-500">
-                                <button onClick={() => handleEditClick(orden)} className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</button>
+                                {orden.deliveredByLogisticsAt}
                             </td>
                             <td>
                                 <button type="button" className="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2" onClick={() => EntregarOrden(index)}>Entregar</button>

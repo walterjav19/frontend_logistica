@@ -10,20 +10,23 @@ function TablaEntrega({entregas}) {
                     </tr>
                     
                     <tr>
-                        <th scope="col" className="px-6 py-3">
+                    <th scope="col" className="px-6 py-3">
                             Id Orden
                         </th>
                         <th scope="col" className="px-6 py-3">
-                            Country
+                            Description
                         </th>
                         <th scope="col" className="px-6 py-3">
-                            TimeStamp
+                            Total Ammount
                         </th>
                         <th scope="col" className="px-6 py-3">
-                            No. Transaction
+                            Status
                         </th>
                         <th scope="col" className="px-6 py-3">
-                            Partner
+                            Fecha Recibido
+                        </th>
+                        <th scope="col" className="px-6 py-3">
+                            Fecha Entregado
                         </th>
                     </tr>
                 </thead>
@@ -35,16 +38,19 @@ function TablaEntrega({entregas}) {
                                 {entrega.id}
                             </th>
                             <td className="px-6 py-4 text-green-500">
-                                {entrega.country}
+                                {entrega.description}
                             </td>
                             <td className="px-6 py-4 text-red-500">
-                                {entrega.timestamp}
+                                {entrega.totalAmount}
                             </td>
                             <td className="px-6 py-4 text-yellow-500">
-                                {entrega.transaction}
+                                {entrega.status}
                             </td>
                             <td className="px-6 py-4">
-                                {entrega.partner}
+                                {entrega.receivedByWarehouseAt}
+                            </td>
+                            <td className="px-6 py-4">
+                                {entrega.deliveredByLogisticsAt}
                             </td>
                         </tr>
                     ))}
